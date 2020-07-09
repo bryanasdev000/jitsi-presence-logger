@@ -1,194 +1,200 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-  </head>
-  <body>
-    <header>
-      <section  style="background:transparent !important" class="jumbotron text-center">
-        <div class="container">
-          <h1>Presence Logger</h1>
-          <p class="lead text-muted">Lista de presença</p>
-        </div>
-      </section>
-    </header>
-    <div class="container">
-      <div class="row">
-        <div class="col-sm-4">
-          <h3>Busca por curso</h3>
-          <input id="msg" type="text" class="form-control" name="msg" placeholder="ID do curso">
-        </div>
-        <div class="col-sm-4">
-          <h3>Busca por turma</h3>
-          <input id="msg" type="text" class="form-control" name="msg" placeholder="ID da turma">
-        </div>
-        <div class="col-sm-4">
-          <h3>Busca por aluno</h3>
-          <input id="msg" type="text" class="form-control" name="msg" placeholder="Email do aluno">
-        </div>
+   <head>
+      <title>Jitsi Presence Logger</title>
+      <!-- Required meta tags -->
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <!-- Bootstrap CSS -->
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+      <script src="js/scripts.js"></script> 
+   </head>
+   <body>
+      <header>
+         <section  style="background:transparent !important" class="jumbotron text-center">
+            <div class="container">
+               <h1>Presence Logger</h1>
+               <p class="lead text-muted">Lista de presença</p>
+            </div>
+         </section>
+      </header>
+      <div class="container">
+         <div class="row">
+            <div class="col-sm-3">
+               <h3>Busca por curso</h3>
+               <input id="cursoInput" type="text" class="form-control" name="curso" placeholder="ID do curso">
+            </div>
+            <div class="col-sm-3">
+               <h3>Busca por turma</h3>
+               <input id="turmaInput" type="text" class="form-control" name="turma" placeholder="ID da turma">
+            </div>
+            <div class="col-sm-3">
+               <h3>Busca por aluno</h3>
+               <input id="alunoInput" type="text" class="form-control" name="aluno" placeholder="Email do aluno">
+            </div>
+            <div class="col-sm-3">
+               <h3>Busca por aula</h3>
+               <input id="aulaInput" type="text" class="form-control" name="aula" placeholder="ID da aula">
+            </div>
+         </div>
       </div>
-    </div>
-    <div style="margin-top:35px" class="d-flex justify-content-center">
-      <h4>Últimos registros  </h4>
-    </div>
-    <div class="container">
-      <div class="d-flex justify-content-center table-hover">
-        <table class="table table-bordered table-hover">
-          <tr>
-            <th>Aula</th>
-            <th>Curso</th>
-            <th>Turma</th>
-            <th>Aluno</th>
-            <th>JID</th>
-            <th>Email</th>
-            <th>Timestamp</th>
-            <th>Ação</th>
-          </tr>
-          <tr>
-            <td>Lua4everyone 1</td>
-            <td>4444</td>
-            <td>50</td>
-            <td>Alfa</td>
-            <td>a09b02ec-281a-4d9d-b4b5-d5669dd681c6@jitsi.domain.tld/BdgpOii4</td>
-            <td>alfa@domain.tld</td>
-            <td>06/17/2020 @ 8:18pm (UTC)</td>
-            <td>Login</td>
-          </tr>
-          <tr>
-            <td>Lua4everyone 1</td>
-            <td>4444</td>
-            <td>50</td>
-            <td>Alfa</td>
-            <td>a09b02ec-281a-4d9d-b4b5-d5669dd681c6@jitsi.domain.tld/BdgpOii4</td>
-            <td>alfa@domain.tld</td>
-            <td>06/17/2020 @ 8:30pm (UTC)</td>
-            <td>Logout</td>
-          </tr>
-          <tr>
-            <td>Lua4everyone 1</td>
-            <td>4444</td>
-            <td>50</td>
-            <td>Bravo</td>
-            <td>a09b02ec-281a-4d9d-b4b5-d5669dd681c6@jitsi.domain.tld/BdgpOii4</td>
-            <td>bravo@domain.tld</td>
-            <td>06/17/2020 @ 8:18pm (UTC)</td>
-            <td>Login</td>
-          </tr>
-          <tr>
-            <td>Lua4everyone 1</td>
-            <td>4444</td>
-            <td>50</td>
-            <td>Bravo</td>
-            <td>a09b02ec-281a-4d9d-b4b5-d5669dd681c6@jitsi.domain.tld/BdgpOii4</td>
-            <td>bravo@domain.tld</td>
-            <td>06/17/2020 @ 8:30pm (UTC)</td>
-            <td>Logout</td>
-          </tr>
-          <tr>
-            <td>Lua4everyone 1</td>
-            <td>4444</td>
-            <td>50</td>
-            <td>Charlie</td>
-            <td>a09b02ec-281a-4d9d-b4b5-d5669dd681c6@jitsi.domain.tld/BdgpOii4</td>
-            <td>charlie@domain.tld</td>
-            <td>06/17/2020 @ 8:18pm (UTC)</td>
-            <td>Login</td>
-          </tr>
-          <tr>
-            <td>Lua4everyone 1</td>
-            <td>4444</td>
-            <td>50</td>
-            <td>Charlie</td>
-            <td>a09b02ec-281a-4d9d-b4b5-d5669dd681c6@jitsi.domain.tld/BdgpOii4</td>
-            <td>charlie@domain.tld</td>
-            <td>06/17/2020 @ 8:30pm (UTC)</td>
-            <td>Logout</td>
-          </tr>
-          <tr>
-            <td>Lua4everyone 1</td>
-            <td>4444</td>
-            <td>50</td>
-            <td>Delta</td>
-            <td>a09b02ec-281a-4d9d-b4b5-d5669dd681c6@jitsi.domain.tld/BdgpOii4</td>
-            <td>delta@domain.tld</td>
-            <td>06/17/2020 @ 8:18pm (UTC)</td>
-            <td>Login</td>
-          </tr>
-          <tr>
-            <td>Lua4everyone 1</td>
-            <td>4444</td>
-            <td>50</td>
-            <td>Delta</td>
-            <td>a09b02ec-281a-4d9d-b4b5-d5669dd681c6@jitsi.domain.tld/BdgpOii4</td>
-            <td>delta@domain.tld</td>
-            <td>06/17/2020 @ 8:30pm (UTC)</td>
-            <td>Logout</td>
-          </tr>
-          <tr>
-            <td>Lua4everyone 2</td>
-            <td>4444</td>
-            <td>50</td>
-            <td>Echo</td>
-            <td>a09b02ec-281a-4d9d-b4b5-d5669dd681c6@jitsi.domain.tld/BdgpOii4</td>
-            <td>echo@domain.tld</td>
-            <td>06/17/2020 @ 8:18pm (UTC)</td>
-            <td>Login</td>
-          </tr>
-          <tr>
-            <td>Lua4everyone 2</td>
-            <td>4444</td>
-            <td>50</td>
-            <td>Echo</td>
-            <td>a09b02ec-281a-4d9d-b4b5-d5669dd681c6@jitsi.domain.tld/BdgpOii4</td>
-            <td>echo@domain.tld</td>
-            <td>06/17/2020 @ 8:30pm (UTC)</td>
-            <td>Logout</td>
-          </tr>
-          <tr>
-            <td>Lua4everyone 2</td>
-            <td>4444</td>
-            <td>50</td>
-            <td>Foxtrot</td>
-            <td>a09b02ec-281a-4d9d-b4b5-d5669dd681c6@jitsi.domain.tld/BdgpOii4</td>
-            <td>foxtrot@domain.tld</td>
-            <td>06/17/2020 @ 8:18pm (UTC)</td>
-            <td>Login</td>
-          </tr>
-          <tr>
-            <td>Lua4everyone 2</td>
-            <td>4444</td>
-            <td>50</td>
-            <td>Foxtrot</td>
-            <td>a09b02ec-281a-4d9d-b4b5-d5669dd681c6@jitsi.domain.tld/BdgpOii4</td>
-            <td>foxtrot@domain.tld</td>
-            <td>06/17/2020 @ 8:30pm (UTC)</td>
-            <td>Logout</td>
-          </tr>
-        </table>
+      <div style="margin-top:35px" class="d-flex justify-content-center">
+         <h4>Últimos registros  </h4>
       </div>
-    </div>
-    <nav aria-label="Pages">
-      <ul class="pagination justify-content-center">
-        <li class="page-item">
-          <a class="page-link" href="#" aria-label="Previous">
-          <span aria-hidden="true">&laquo;</span>
-          <span class="sr-only">Previous</span>
-          </a>
-        </li>
-        <li class="page-item"><a class="page-link" href="#">1</a></li>
-        <li class="page-item"><a class="page-link" href="#">2</a></li>
-        <li class="page-item"><a class="page-link" href="#">3</a></li>
-        <li class="page-item">
-          <a class="page-link" href="#" aria-label="Next">
-          <span aria-hidden="true">&raquo;</span>
-          <span class="sr-only">Next</span>
-          </a>
-        </li>
-      </ul>
-    </nav>
-  </body>
+      <div class="container">
+         <div class="d-flex justify-content-center table-hover">
+            <table class="table table-bordered table-hover">
+               <tr>
+                  <th>Aula</th>
+                  <th>Curso</th>
+                  <th>Turma</th>
+                  <th>Aluno</th>
+                  <th>JID</th>
+                  <th>Email</th>
+                  <th>Timestamp</th>
+                  <th>Ação</th>
+               </tr>
+               <tr>
+                  <td>Lua4everyone 1</td>
+                  <td>4444</td>
+                  <td>50</td>
+                  <td>Alfa</td>
+                  <td>a09b02ec-281a-4d9d-b4b5-d5669dd681c6@jitsi.domain.tld/BdgpOii4</td>
+                  <td>alfa@domain.tld</td>
+                  <td>06/17/2020 @ 8:18pm (UTC)</td>
+                  <td>Login</td>
+               </tr>
+               <tr>
+                  <td>Lua4everyone 1</td>
+                  <td>4444</td>
+                  <td>50</td>
+                  <td>Alfa</td>
+                  <td>a09b02ec-281a-4d9d-b4b5-d5669dd681c6@jitsi.domain.tld/BdgpOii4</td>
+                  <td>alfa@domain.tld</td>
+                  <td>06/17/2020 @ 8:30pm (UTC)</td>
+                  <td>Logout</td>
+               </tr>
+               <tr>
+                  <td>Lua4everyone 1</td>
+                  <td>4444</td>
+                  <td>50</td>
+                  <td>Bravo</td>
+                  <td>a09b02ec-281a-4d9d-b4b5-d5669dd681c6@jitsi.domain.tld/BdgpOii4</td>
+                  <td>bravo@domain.tld</td>
+                  <td>06/17/2020 @ 8:18pm (UTC)</td>
+                  <td>Login</td>
+               </tr>
+               <tr>
+                  <td>Lua4everyone 1</td>
+                  <td>4444</td>
+                  <td>50</td>
+                  <td>Bravo</td>
+                  <td>a09b02ec-281a-4d9d-b4b5-d5669dd681c6@jitsi.domain.tld/BdgpOii4</td>
+                  <td>bravo@domain.tld</td>
+                  <td>06/17/2020 @ 8:30pm (UTC)</td>
+                  <td>Logout</td>
+               </tr>
+               <tr>
+                  <td>Lua4everyone 1</td>
+                  <td>4444</td>
+                  <td>50</td>
+                  <td>Charlie</td>
+                  <td>a09b02ec-281a-4d9d-b4b5-d5669dd681c6@jitsi.domain.tld/BdgpOii4</td>
+                  <td>charlie@domain.tld</td>
+                  <td>06/17/2020 @ 8:18pm (UTC)</td>
+                  <td>Login</td>
+               </tr>
+               <tr>
+                  <td>Lua4everyone 1</td>
+                  <td>4444</td>
+                  <td>50</td>
+                  <td>Charlie</td>
+                  <td>a09b02ec-281a-4d9d-b4b5-d5669dd681c6@jitsi.domain.tld/BdgpOii4</td>
+                  <td>charlie@domain.tld</td>
+                  <td>06/17/2020 @ 8:30pm (UTC)</td>
+                  <td>Logout</td>
+               </tr>
+               <tr>
+                  <td>Lua4everyone 1</td>
+                  <td>4444</td>
+                  <td>50</td>
+                  <td>Delta</td>
+                  <td>a09b02ec-281a-4d9d-b4b5-d5669dd681c6@jitsi.domain.tld/BdgpOii4</td>
+                  <td>delta@domain.tld</td>
+                  <td>06/17/2020 @ 8:18pm (UTC)</td>
+                  <td>Login</td>
+               </tr>
+               <tr>
+                  <td>Lua4everyone 1</td>
+                  <td>4444</td>
+                  <td>50</td>
+                  <td>Delta</td>
+                  <td>a09b02ec-281a-4d9d-b4b5-d5669dd681c6@jitsi.domain.tld/BdgpOii4</td>
+                  <td>delta@domain.tld</td>
+                  <td>06/17/2020 @ 8:30pm (UTC)</td>
+                  <td>Logout</td>
+               </tr>
+               <tr>
+                  <td>Lua4everyone 2</td>
+                  <td>4444</td>
+                  <td>50</td>
+                  <td>Echo</td>
+                  <td>a09b02ec-281a-4d9d-b4b5-d5669dd681c6@jitsi.domain.tld/BdgpOii4</td>
+                  <td>echo@domain.tld</td>
+                  <td>06/17/2020 @ 8:18pm (UTC)</td>
+                  <td>Login</td>
+               </tr>
+               <tr>
+                  <td>Lua4everyone 2</td>
+                  <td>4444</td>
+                  <td>50</td>
+                  <td>Echo</td>
+                  <td>a09b02ec-281a-4d9d-b4b5-d5669dd681c6@jitsi.domain.tld/BdgpOii4</td>
+                  <td>echo@domain.tld</td>
+                  <td>06/17/2020 @ 8:30pm (UTC)</td>
+                  <td>Logout</td>
+               </tr>
+               <tr>
+                  <td>Lua4everyone 2</td>
+                  <td>4444</td>
+                  <td>50</td>
+                  <td>Foxtrot</td>
+                  <td>a09b02ec-281a-4d9d-b4b5-d5669dd681c6@jitsi.domain.tld/BdgpOii4</td>
+                  <td>foxtrot@domain.tld</td>
+                  <td>06/17/2020 @ 8:18pm (UTC)</td>
+                  <td>Login</td>
+               </tr>
+               <tr>
+                  <td>Lua4everyone 2</td>
+                  <td>4444</td>
+                  <td>50</td>
+                  <td>Foxtrot</td>
+                  <td>a09b02ec-281a-4d9d-b4b5-d5669dd681c6@jitsi.domain.tld/BdgpOii4</td>
+                  <td>foxtrot@domain.tld</td>
+                  <td>06/17/2020 @ 8:30pm (UTC)</td>
+                  <td>Logout</td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <nav aria-label="Pages">
+         <ul class="pagination justify-content-center">
+            <li class="page-item">
+               <a class="page-link" href="#" aria-label="Previous">
+               <span aria-hidden="true">&laquo;</span>
+               <span class="sr-only">Previous</span>
+               </a>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item">
+               <a class="page-link" href="#" aria-label="Next">
+               <span aria-hidden="true">&raquo;</span>
+               <span class="sr-only">Next</span>
+               </a>
+            </li>
+         </ul>
+      </nav>
+   </body>
 </html>
