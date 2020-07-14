@@ -1,6 +1,4 @@
 // TODO Return error on table if getData == error
-// TODO Table replace instead of table append
-// TODO Table inside div formatted
 function getData(input, url) {
     console.log("Fui chamado por " + input + " !" + " e fiz a requisicao em " + url + " !")
     var request = new XMLHttpRequest();
@@ -9,7 +7,9 @@ function getData(input, url) {
     request.send();
     request.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-            document.body.appendChild(buildHtmlTable(request.response));
+            var table = document.getElementById("tableRegistros");
+            var parentDiv = table.parentNode;
+            parentDiv.replaceChild(buildHtmlTable(request.response),table);
         }
         // else return table head with "ERROR"
     }
@@ -31,6 +31,7 @@ function buildHtmlTable(arr) {
         }
         table.appendChild(tr);
     }
+    table.setAttribute("id", "tableRegistros");
     return table;
 }
 
@@ -61,10 +62,6 @@ var _table_ = document.createElement('table'),
     _th_ = document.createElement('th'),
     _td_ = document.createElement('td');
 _table_.className = "table table-bordered table-hover";
-_divOut_.className = "container"
-_divIn_.className = "d-flex justify-content-center table-hover"
-_divIn_ = _divOut_.appendChild(_divIn_);
-_table_ = _divIn_.appendChild(_table_);
 
 window.addEventListener('load', function() {
     const baseURL = "http://localhost:8080"
@@ -72,7 +69,6 @@ window.addEventListener('load', function() {
     var turma = document.getElementById("turmaInput");
     var aluno = document.getElementById("alunoInput");
     var aula = document.getElementById("aulaInput");
-    document.body.insertBefore(_divIn_, document.getElementById("logreg")); 
     // Main page
     getData(null, baseURL + "/v1/logs?last=20")
     // Search
@@ -80,6 +76,7 @@ window.addEventListener('load', function() {
         if (event.keyCode === 13) {
             const url = baseURL + "/v1/logs?courseid=" + curso.value;
             event.preventDefault();
+            document.getElementById("headRegistros").innerHTML = "Registros encontrados";
             getData(curso, url);
         }
     });
@@ -87,6 +84,7 @@ window.addEventListener('load', function() {
         if (event.keyCode === 13) {
             const url = baseURL + "/v1/logs?classid=" + turma.value;
             event.preventDefault();
+            document.getElementById("headRegistros").innerHTML = "Registros encontrados";
             getData(turma, url);
         }
     });
@@ -94,6 +92,7 @@ window.addEventListener('load', function() {
         if (event.keyCode === 13) {
             const url = baseURL + "/v1/logs?studentEmail=" + aluno.value;
             event.preventDefault();
+            document.getElementById("headRegistros").innerHTML = "Registros encontrados";
             getData(aluno, url);
         }
     });
@@ -101,6 +100,7 @@ window.addEventListener('load', function() {
         if (event.keyCode === 13) {
             const url = baseURL + "/v1/logs?roomid=" + aula.value;
             event.preventDefault();
+            document.getElementById("headRegistros").innerHTML = "Registros encontrados";
             getData(aluno, url);
         }
     });
