@@ -11,7 +11,10 @@ function getData(input, url) {
             var parentDiv = table.parentNode;
             parentDiv.replaceChild(buildHtmlTable(request.response),table);
         }
-        // else return table head with "ERROR"
+        else if (this.readyState == 4) {
+                alert("Nenhum registro encontrado (Erro ou vazio)");
+        }
+        // else return table head with respective error
     }
 }
 
