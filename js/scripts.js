@@ -75,6 +75,7 @@ window.addEventListener('load', function() {
     // Main page
     getData(null, baseURL + "/v1/logs?last=20")
     // Search
+    // TODO Return last logs if input equals ""
     curso.addEventListener("keyup", function(event) {
         if (event.keyCode === 13) {
             const url = baseURL + "/v1/logs?courseid=" + curso.value;
