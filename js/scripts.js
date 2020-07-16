@@ -66,14 +66,35 @@ var _table_ = document.createElement('table'),
     _td_ = document.createElement('td');
 _table_.className = "table table-bordered table-hover";
 
+var size = 20;
+
 window.addEventListener('load', function() {
     const baseURL = "http://localhost:8080"
     var curso = document.getElementById("cursoInput");
     var turma = document.getElementById("turmaInput");
     var aluno = document.getElementById("alunoInput");
     var aula = document.getElementById("aulaInput");
+    var anterior = document.getElementById("anterior");
+    var proximo = document.getElementById("proximo");
     // Main page
-    getData(null, baseURL + "/v1/logs?last=20")
+    getData(null, baseURL + "/v1/logs?last=1&size=20&skip=" + size);
+    // Buttons
+    anterior.addEventListener("click", function(event) {
+        if (size <= 20) {
+            size = 20
+            getData(null, baseURL + "/v1/logs?last=1&size=20&skip=" + size);
+        }
+        else {
+            size -= 20;
+            getData(null, baseURL + "/v1/logs?last=1&size=20&skip=" + size);
+            console.log(size);
+        }
+    });
+    proximo.addEventListener("click", function(event) {
+        size += 20;
+        getData(null, baseURL + "/v1/logs?last=1&size=20&skip=" + size);
+        console.log(size);
+    });
     // Search
     // TODO Return last logs if input equals ""
     curso.addEventListener("keyup", function(event) {
