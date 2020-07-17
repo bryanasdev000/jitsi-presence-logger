@@ -5,16 +5,14 @@ function getData(input, url) {
     request.open('GET', url);
     request.responseType = 'json';
     request.send();
-    request.onreadystatechange = function() {
+    request.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             var table = document.getElementById("tableRegistros");
             var parentDiv = table.parentNode;
-            parentDiv.replaceChild(buildHtmlTable(request.response),table);
+            parentDiv.replaceChild(buildHtmlTable(request.response), table);
+        } else if (this.readyState == 4) {
+            alert("Nenhum registro encontrado (Erro ou vazio)");
         }
-        else if (this.readyState == 4) {
-                alert("Nenhum registro encontrado (Erro ou vazio)");
-        }
-        // else return table head with respective error
     }
 }
 
@@ -65,11 +63,13 @@ var _table_ = document.createElement('table'),
     _th_ = document.createElement('th'),
     _td_ = document.createElement('td');
 _table_.className = "table table-bordered table-hover";
-
+const baseURL = "http://localhost:8080"
+var skip = 0;
 var size = 20;
+var endpoint = baseURL + "/v1/logs?last=1&size=" + size + "&skip=" + skip;
 
-window.addEventListener('load', function() {
-    const baseURL = "http://localhost:8080"
+window.addEventListener('load', function () {
+    // TODO input sanitizer
     var curso = document.getElementById("cursoInput");
     var turma = document.getElementById("turmaInput");
     var aluno = document.getElementById("alunoInput");
@@ -77,56 +77,59 @@ window.addEventListener('load', function() {
     var anterior = document.getElementById("anterior");
     var proximo = document.getElementById("proximo");
     // Main page
-    getData(null, baseURL + "/v1/logs?last=1&size=20&skip=" + size);
+    getData("init", endpoint);
     // Buttons
-    anterior.addEventListener("click", function(event) {
-        if (size <= 20) {
-            size = 20
-            getData(null, baseURL + "/v1/logs?last=1&size=20&skip=" + size);
-        }
-        else {
-            size -= 20;
-            getData(null, baseURL + "/v1/logs?last=1&size=20&skip=" + size);
-            console.log(size);
+    anterior.addEventListener("click", function (event) {
+        if (skip < 0) {
+            skip = 0;
+            getData(null, endpoint);
+            console.log(endpoint);
+        } else {
+            skip -= 20;
+            getData(null, endpoint);
+            console.log(endpoint);
         }
     });
-    proximo.addEventListener("click", function(event) {
-        size += 20;
-        getData(null, baseURL + "/v1/logs?last=1&size=20&skip=" + size);
-        console.log(size);
+    proximo.addEventListener("click", function (event) {
+        skip += 20;
+        getData(null, endpoint);
+        console.log(skip);
     });
     // Search
     // TODO Return last logs if input equals ""
-    curso.addEventListener("keyup", function(event) {
+    // TODO Format datetime
+    // TODO Stop when arr null
+    curso.addEventListener("keyup", function (event) {
         if (event.keyCode === 13) {
-            const url = baseURL + "/v1/logs?courseid=" + curso.value;
+            endpoint = baseURL + "/v1/logs?courseid=" + curso.value + "&size=" + size + "&skip=" + skip;
+            console.log(endpoint);
             event.preventDefault();
             document.getElementById("headRegistros").innerHTML = "Registros encontrados";
-            getData(curso, url);
+            getData("curso", endpoint);
         }
     });
-    turma.addEventListener("keyup", function(event) {
+    turma.addEventListener("keyup", function (event) {
         if (event.keyCode === 13) {
-            const url = baseURL + "/v1/logs?classid=" + turma.value;
+            endpoint = baseURL + "/v1/logs?classid=" + turma.value + "&size=" + size + "&skip=" + skip;
             event.preventDefault();
             document.getElementById("headRegistros").innerHTML = "Registros encontrados";
-            getData(turma, url);
+            getData("turma", endpoint);
         }
     });
-    aluno.addEventListener("keyup", function(event) {
+    aluno.addEventListener("keyup", function (event) {
         if (event.keyCode === 13) {
-            const url = baseURL + "/v1/logs?studentEmail=" + aluno.value;
+            endpoint = baseURL + "/v1/logs?studentEmail=" + aluno.value + "&size=" + size + "&skip=" + skip;
             event.preventDefault();
             document.getElementById("headRegistros").innerHTML = "Registros encontrados";
-            getData(aluno, url);
+            getData("aluno", endpoint);
         }
     });
-    aula.addEventListener("keyup", function(event) {
+    aula.addEventListener("keyup", function (event) {
         if (event.keyCode === 13) {
-            const url = baseURL + "/v1/logs?roomid=" + aula.value;
+            endpoint = baseURL + "/v1/logs?roomid=" + aula.value + "&size=" + size + "&skip=" + skip;
             event.preventDefault();
             document.getElementById("headRegistros").innerHTML = "Registros encontrados";
-            getData(aluno, url);
+            getData("aluno", endpoint);
         }
     });
 });
