@@ -1,4 +1,4 @@
-// TODO Return error on table if getData == error
+// Request
 function getData(input, url) {
     console.log("Fui chamado por " + input + " !" + " e fiz a requisicao em " + url + " !")
     var request = new XMLHttpRequest();
@@ -56,6 +56,7 @@ function addAllColumnHeaders(arr, table) {
     return columnSet;
 }
 
+// Vars
 var _divOut_ = document.createElement('div');
 var _divIn_ = document.createElement('div');
 var _table_ = document.createElement('table'),
@@ -64,12 +65,15 @@ var _table_ = document.createElement('table'),
     _td_ = document.createElement('td');
 _table_.className = "table table-bordered table-hover";
 const baseURL = "http://localhost:8080"
+var skipParam = "&skip=";
 var skip = 0;
+var sizeParam = "&size=";
 var size = 20;
-var endpoint = baseURL + "/v1/logs?last=1&size=" + size + "&skip=" + skip;
+var endpoint =  "/v1/logs?last=1";
+var url = baseURL + endpoint + sizeParam + size + skipParam + skip;
 
+// Window
 window.addEventListener('load', function () {
-    // TODO input sanitizer
     var curso = document.getElementById("cursoInput");
     var turma = document.getElementById("turmaInput");
     var aluno = document.getElementById("alunoInput");
@@ -77,59 +81,63 @@ window.addEventListener('load', function () {
     var anterior = document.getElementById("anterior");
     var proximo = document.getElementById("proximo");
     // Main page
-    getData("init", endpoint);
+    getData("init", url);
     // Buttons
     anterior.addEventListener("click", function (event) {
-        if (skip < 0) {
+        if (skip < 20) {
             skip = 0;
-            getData(null, endpoint);
-            console.log(endpoint);
+            url = baseURL + endpoint + sizeParam + size + skipParam + skip;
+            getData(null, url);
         } else {
             skip -= 20;
-            getData(null, endpoint);
-            console.log(endpoint);
+            url = baseURL + endpoint + sizeParam + size + skipParam + skip;
+            getData(null, url);
         }
     });
     proximo.addEventListener("click", function (event) {
         skip += 20;
-        getData(null, endpoint);
-        console.log(skip);
+        url = baseURL + endpoint + sizeParam + size + skipParam + skip;
+        getData(null, url);
     });
     // Search
-    // TODO Return last logs if input equals ""
-    // TODO Format datetime
-    // TODO Stop when arr null
     curso.addEventListener("keyup", function (event) {
         if (event.keyCode === 13) {
-            endpoint = baseURL + "/v1/logs?courseid=" + curso.value + "&size=" + size + "&skip=" + skip;
-            console.log(endpoint);
+            endpoint = "/v1/logs?courseid=" + curso.value;
+            skip = 0;
+            url = baseURL + endpoint + sizeParam + size + skipParam + skip;
             event.preventDefault();
             document.getElementById("headRegistros").innerHTML = "Registros encontrados";
-            getData("curso", endpoint);
+            getData("curso", url);
         }
     });
     turma.addEventListener("keyup", function (event) {
         if (event.keyCode === 13) {
-            endpoint = baseURL + "/v1/logs?classid=" + turma.value + "&size=" + size + "&skip=" + skip;
+            endpoint = "/v1/logs?classid=" + turma.value;
+            skip = 0;
+            url = baseURL + endpoint + sizeParam + size + skipParam + skip;
             event.preventDefault();
             document.getElementById("headRegistros").innerHTML = "Registros encontrados";
-            getData("turma", endpoint);
+            getData("turma", url);
         }
     });
     aluno.addEventListener("keyup", function (event) {
         if (event.keyCode === 13) {
-            endpoint = baseURL + "/v1/logs?studentEmail=" + aluno.value + "&size=" + size + "&skip=" + skip;
+            endpoint = "/v1/logs?studentEmail=" + aluno.value;
+            skip = 0;
+            url = baseURL + endpoint + sizeParam + size + skipParam + skip;
             event.preventDefault();
             document.getElementById("headRegistros").innerHTML = "Registros encontrados";
-            getData("aluno", endpoint);
+            getData("aluno", url);
         }
     });
     aula.addEventListener("keyup", function (event) {
         if (event.keyCode === 13) {
-            endpoint = baseURL + "/v1/logs?roomid=" + aula.value + "&size=" + size + "&skip=" + skip;
+            endpoint = "/v1/logs?roomid=" + aula.value;
+            skip = 0;
+            url = baseURL + endpoint + sizeParam + size + skipParam + skip;
             event.preventDefault();
             document.getElementById("headRegistros").innerHTML = "Registros encontrados";
-            getData("aluno", endpoint);
+            getData("aluno", url);
         }
     });
 });
