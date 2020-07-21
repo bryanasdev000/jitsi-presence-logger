@@ -69,7 +69,7 @@ var skipParam = "&skip=";
 var skip = 0;
 var sizeParam = "&size=";
 var size = 20;
-var endpoint =  "/v1/logs?last=1";
+var endpoint =  "/v1/logs/last?";
 var url = baseURL + endpoint + sizeParam + size + skipParam + skip;
 
 // Window
@@ -102,7 +102,7 @@ window.addEventListener('load', function () {
     // Search
     curso.addEventListener("keyup", function (event) {
         if (event.keyCode === 13) {
-            endpoint = "/v1/logs?courseid=" + curso.value;
+            endpoint = "/v1/logs/course?id=" + curso.value;
             skip = 0;
             url = baseURL + endpoint + sizeParam + size + skipParam + skip;
             event.preventDefault();
@@ -112,7 +112,7 @@ window.addEventListener('load', function () {
     });
     turma.addEventListener("keyup", function (event) {
         if (event.keyCode === 13) {
-            endpoint = "/v1/logs?classid=" + turma.value;
+            endpoint = "/v1/logs/class?id=" + turma.value;
             skip = 0;
             url = baseURL + endpoint + sizeParam + size + skipParam + skip;
             event.preventDefault();
@@ -122,7 +122,7 @@ window.addEventListener('load', function () {
     });
     aluno.addEventListener("keyup", function (event) {
         if (event.keyCode === 13) {
-            endpoint = "/v1/logs?studentEmail=" + aluno.value;
+            endpoint = "/v1/logs/student?email=" + aluno.value;
             skip = 0;
             url = baseURL + endpoint + sizeParam + size + skipParam + skip;
             event.preventDefault();
@@ -132,7 +132,7 @@ window.addEventListener('load', function () {
     });
     aula.addEventListener("keyup", function (event) {
         if (event.keyCode === 13) {
-            endpoint = "/v1/logs?roomid=" + aula.value;
+            endpoint = "/v1/logs/room?id=" + aula.value;
             skip = 0;
             url = baseURL + endpoint + sizeParam + size + skipParam + skip;
             event.preventDefault();
