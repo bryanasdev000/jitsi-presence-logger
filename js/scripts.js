@@ -9,7 +9,12 @@ function getData(input, url) {
         if (this.readyState == 4 && this.status == 200) {
             var table = document.getElementById("tableRegistros");
             var parentDiv = table.parentNode;
-            parentDiv.replaceChild(buildHtmlTable(request.response), table);
+            if (request.response == null) {
+                alert("Carga de dados vazia")
+            }
+            else {
+                parentDiv.replaceChild(buildHtmlTable(request.response), table);
+            }
         } else if (this.readyState == 4) {
             alert("Nenhum registro encontrado (Erro ou vazio)");
         }
@@ -76,8 +81,8 @@ var url = baseURL + endpoint + sizeParam + size + skipParam + skip;
 window.addEventListener('load', function () {
     var curso = document.getElementById("cursoInput");
     var turma = document.getElementById("turmaInput");
-    var aluno = document.getElementById("alunoInput");
-    var aula = document.getElementById("aulaInput");
+    var email = document.getElementById("emailInput");
+    var sala = document.getElementById("salaInput");
     var anterior = document.getElementById("anterior");
     var proximo = document.getElementById("proximo");
     // Main page
@@ -86,6 +91,7 @@ window.addEventListener('load', function () {
     anterior.addEventListener("click", function (event) {
         if (skip < 20) {
             skip = 0;
+            alert("Pagina 1")
             url = baseURL + endpoint + sizeParam + size + skipParam + skip;
             getData(null, url);
         } else {
@@ -120,24 +126,24 @@ window.addEventListener('load', function () {
             getData("turma", url);
         }
     });
-    aluno.addEventListener("keyup", function (event) {
+    email.addEventListener("keyup", function (event) {
         if (event.keyCode === 13) {
-            endpoint = "/v1/logs/student?email=" + aluno.value;
+            endpoint = "/v1/logs/student?email=" + email.value;
             skip = 0;
             url = baseURL + endpoint + sizeParam + size + skipParam + skip;
             event.preventDefault();
             document.getElementById("headRegistros").innerHTML = "Registros encontrados";
-            getData("aluno", url);
+            getData("email", url);
         }
     });
-    aula.addEventListener("keyup", function (event) {
+    sala.addEventListener("keyup", function (event) {
         if (event.keyCode === 13) {
-            endpoint = "/v1/logs/room?id=" + aula.value;
+            endpoint = "/v1/logs/room?id=" + sala.value;
             skip = 0;
             url = baseURL + endpoint + sizeParam + size + skipParam + skip;
             event.preventDefault();
             document.getElementById("headRegistros").innerHTML = "Registros encontrados";
-            getData("aluno", url);
+            getData("sala", url);
         }
     });
 });
