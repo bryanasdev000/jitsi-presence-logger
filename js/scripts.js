@@ -10,13 +10,14 @@ function getData(input, url) {
             var table = document.getElementById("tableRegistros");
             var parentDiv = table.parentNode;
             if (request.response == null) {
-                alert("Carga de dados vazia")
+                alert("Nenhum registro encontrado")
             }
             else {
                 parentDiv.replaceChild(buildHtmlTable(request.response), table);
             }
         } else if (this.readyState == 4) {
-            alert("Nenhum registro encontrado (Erro ou vazio)");
+            alert("Erro - Falha na busca de registros");
+            console.log(this.readyState,this.status)
         }
     }
 }
