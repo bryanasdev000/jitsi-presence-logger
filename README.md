@@ -9,6 +9,9 @@ Sistema modular para registro de presenca de alunos integrado a um LMS (Moodle) 
 - [ ] Check dataset when skip exceeds the number of elements (stop when arr is null and request does not contain any elements)
 - [ ] Return last logs if input equals ""
 - [ ] Format datetime (ISO 8601 to something better to see)
+- [ ] Tests?
+- [ ] Pipeline (docker build)
+- [ ] Rewrite using VueJS
 
 ## Overview
 
