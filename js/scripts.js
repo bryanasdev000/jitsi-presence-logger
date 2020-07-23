@@ -11,13 +11,12 @@ function getData(input, url) {
             var parentDiv = table.parentNode;
             if (request.response == null) {
                 alert("Nenhum registro encontrado")
-            }
-            else {
+            } else {
                 parentDiv.replaceChild(buildHtmlTable(request.response), table);
             }
         } else if (this.readyState == 4) {
             alert("Erro - Falha na busca de registros");
-            console.log(this.readyState,this.status)
+            console.log(this.readyState, this.status)
         }
     }
 }
@@ -63,19 +62,17 @@ function addAllColumnHeaders(arr, table) {
 }
 
 // Vars
-var _divOut_ = document.createElement('div');
-var _divIn_ = document.createElement('div');
 var _table_ = document.createElement('table'),
     _tr_ = document.createElement('tr'),
     _th_ = document.createElement('th'),
     _td_ = document.createElement('td');
 _table_.className = "table table-bordered table-hover";
-const baseURL = "http://localhost:8080"
+const baseURL = "http://localhost:8080" // CHANGE ME
 var skipParam = "&skip=";
 var skip = 0;
 var sizeParam = "&size=";
 var size = 20;
-var endpoint =  "/v1/logs/last?";
+var endpoint = "/v1/logs/last?";
 var url = baseURL + endpoint + sizeParam + size + skipParam + skip;
 
 // Window
