@@ -4,11 +4,9 @@ Sistema modular para registro de presenca de alunos integrado a um LMS (Moodle) 
 
 ## TODOs
 
-- [ ] Return alert on table if getData == error with correct status code handler
+- [ ] Return alert on table if error with correct status code handler
+- [ ] Return last logs if input of search equals ""
 - [ ] Input sanitizer
-- [ ] Check dataset when skip exceeds the number of elements (stop when arr is null and request does not contain any elements)
-- [ ] Return last logs if input equals ""
-- [ ] Format datetime (ISO 8601 to something better to see)
 - [ ] Tests?
 - [ ] Pipeline (docker build)
 - [ ] Rewrite using VueJS
