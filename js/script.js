@@ -67,7 +67,7 @@ var _table_ = document.createElement('table'),
     _th_ = document.createElement('th'),
     _td_ = document.createElement('td');
 _table_.className = "table table-bordered table-hover";
-const baseURL = "http://localhost:8080" // CHANGE ME
+const baseURL = "http://jpl-select:8080" // CHANGE ME
 var skipParam = "&skip=";
 var skip = 0;
 var sizeParam = "&size=";
