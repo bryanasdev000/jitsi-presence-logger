@@ -83,6 +83,10 @@ window.addEventListener('load', function () {
     var sala = document.getElementById("salaInput");
     var anterior = document.getElementById("anterior");
     var proximo = document.getElementById("proximo");
+    var csvData = document.getElementById("csvdatefrom");
+    var csvTimestamp = document.getElementById("csvtimestamp");
+    var csvBaixar = document.getElementById("csvsubmit");
+
     // Main page
     getData("init", url);
     // Buttons
@@ -143,5 +147,22 @@ window.addEventListener('load', function () {
             document.getElementById("headRegistros").innerHTML = "Registros encontrados";
             getData("sala", url);
         }
+    });
+
+    csvData.addEventListener('change', function(_) {
+        try {
+            csvTimestamp.value = csvData.valueAsDate.toISOString();
+        } catch(_) {
+            csvTimestamp.value = new Date(0).toISOString();
+        }
+    });
+
+    csvBaixar.addEventListener('click', function(_) {
+        var timestamp = csvTimestamp.value,
+            url = `${baseURL}/v1/csv?ts=${timestamp}`;
+        console.log("click no botão de baixar csv");
+        console.log(url);
+
+        window.open(url);
     });
 });
