@@ -1,3 +1,8 @@
+// First and foremost,
+if (document.location.search === '') {
+    document.location.search = 'size=20';
+}
+
 // Request
 function getData(input, url) {
     console.log("Fui chamado por " + input + " !" + " e fiz a requisicao em " + url + " !")
@@ -71,7 +76,7 @@ const baseURL = "http://jpl-select:8080" // CHANGE ME
 var skipParam = "&skip=";
 var skip = 0;
 var sizeParam = "&size=";
-var size = 20;
+var size = Number((document.location.search.match(/size=(\d+)/) || {1: 20})[1]);
 var endpoint = "/v1/logs/last?";
 var url = baseURL + endpoint + sizeParam + size + skipParam + skip;
 
@@ -83,23 +88,27 @@ window.addEventListener('load', function () {
     var sala = document.getElementById("salaInput");
     var anterior = document.getElementById("anterior");
     var proximo = document.getElementById("proximo");
+    var csvData = document.getElementById("csvdatefrom");
+    var csvTimestamp = document.getElementById("csvtimestamp");
+    var csvBaixar = document.getElementById("csvsubmit");
+
     // Main page
     getData("init", url);
     // Buttons
     anterior.addEventListener("click", function (event) {
-        if (skip < 20) {
+        if (skip < size) {
             skip = 0;
             alert("Pagina 1")
             url = baseURL + endpoint + sizeParam + size + skipParam + skip;
             getData(null, url);
         } else {
-            skip -= 20;
+            skip -= size;
             url = baseURL + endpoint + sizeParam + size + skipParam + skip;
             getData(null, url);
         }
     });
     proximo.addEventListener("click", function (event) {
-        skip += 20;
+        skip += size;
         url = baseURL + endpoint + sizeParam + size + skipParam + skip;
         getData(null, url);
     });
@@ -143,5 +152,22 @@ window.addEventListener('load', function () {
             document.getElementById("headRegistros").innerHTML = "Registros encontrados";
             getData("sala", url);
         }
+    });
+
+    csvData.addEventListener('change', function(_) {
+        try {
+            csvTimestamp.value = csvData.valueAsDate.toISOString();
+        } catch(_) {
+            csvTimestamp.value = new Date(0).toISOString();
+        }
+    });
+
+    csvBaixar.addEventListener('click', function(_) {
+        var timestamp = csvTimestamp.value,
+            url = `${baseURL}/v1/csv?ts=${timestamp}`;
+        console.log("click no botão de baixar csv");
+        console.log(url);
+
+        window.open(url);
     });
 });
